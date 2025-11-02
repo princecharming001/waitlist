@@ -178,7 +178,7 @@ function App() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <img
-              src="/images/a812b677-40b6-42f6-b932-1f000274952c.png"
+              src="images/a812b677-40b6-42f6-b932-1f000274952c.png"
               alt="Plureto logo"
               className="h-[44px] w-auto object-contain drop-shadow-sm"
               loading="lazy"
@@ -374,7 +374,7 @@ function App() {
         <div className="mx-auto flex justify-center">
           <div className="relative w-[75vw]">
             <img
-              src="/images/a.png"
+              src="images/a.png"
               alt="Plureto app interface"
               className="w-full h-auto object-contain"
               loading="lazy"
@@ -411,7 +411,7 @@ function App() {
             </p>
             <div className="w-full h-[310px] rounded-[32px] flex items-center justify-center overflow-hidden">
               <img
-                src="/images/feature-icons.png"
+                src="images/feature-icons.png"
                 alt="Apps Plureto integrates with"
                 className="w-[88%] h-auto object-contain"
                 loading="lazy"
@@ -429,7 +429,7 @@ function App() {
             </p>
             <div className="relative w-full h-[310px] rounded-[32px] flex items-center justify-center overflow-hidden">
               <img
-                src="/images/feature-reminder.png"
+                src="images/feature-reminder.png"
                 alt="Growth reminders on Plureto"
                 className="relative w-[90%] h-auto object-contain"
                 loading="lazy"
@@ -468,7 +468,7 @@ function App() {
           <div className="flex gap-[40px] pt-[40px]">
             <div className="w-[114px] h-[114px] rotate-[13deg] hover:rotate-0 transition-transform">
               <img
-                src="/images/chromeimg.jpg"
+                src="images/chromeimg.jpg"
                 alt="Floating Chrome icon"
                 className="w-full h-full object-cover rounded-[24px] shadow-[0px_25px_60px_rgba(61,116,182,0.35)] border border-white/40 backdrop-blur-md"
                 loading="lazy"
@@ -476,7 +476,7 @@ function App() {
             </div>
             <div className="w-[107px] h-[107px] rotate-[0.14deg] hover:rotate-0 transition-transform">
               <img
-                src="/images/027712250a632b2e6f63c5466b792494.jpg"
+                src="images/027712250a632b2e6f63c5466b792494.jpg"
                 alt="Floating Instagram icon"
                 className="w-full h-full object-cover rounded-[24px] shadow-[0px_25px_60px_rgba(61,116,182,0.35)] border border-white/40 backdrop-blur-md"
                 loading="lazy"
