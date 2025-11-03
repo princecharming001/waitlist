@@ -21,7 +21,7 @@ function App() {
   const animationFrameRef = useRef(null)
 
   const sectionOrder = useMemo(
-    () => ['hero', 'pillars', 'mockups', 'smarter', 'features-grid', 'calendar', 'insights', 'final-section', 'footer'],
+    () => ['hero', 'pillars', 'smarter', 'features-grid', 'calendar', 'insights', 'final-section', 'footer'],
     [],
   )
 
@@ -212,7 +212,7 @@ function App() {
 
 
   return (
-    <div className="relative w-full min-h-screen bg-white font-['SF_Pro_Display',system-ui,sans-serif]">
+    <div className="relative w-full min-h-screen bg-white font-['SF_Pro_Display',system-ui,sans-serif] overflow-x-hidden">
       {/* Background Effect */}
       <div className="fixed top-0 left-0 w-full h-[1045px] bg-gradient-to-br from-[#D0E5FF] via-[#E8F2FF] to-white opacity-80 blur-[100px] -z-10" />
       
@@ -408,35 +408,36 @@ function App() {
       </section>
 
       
-      {/* Plureto helps section */}
+      {/* Plureto helps section with Phone Mockups */}
       <section id="pillars" className="relative px-[100px] py-[60px] mt-[80px]">
         <div className="mx-auto max-w-[1280px]">
           <h3 className="font-bold text-[52px] leading-[62px] tracking-[-0.02em] text-[#3D74B6] mb-[31px] max-w-[1084px]">
             Plureto helps you make better choices by truly knowing you.
           </h3>
 
-          <div className="flex flex-wrap gap-[18px]">
+          <div className="flex flex-wrap gap-[18px] mb-[40px]">
             <span className="font-medium text-[18px] leading-[41px] text-[#666666]">Always On Insights</span>
             <span className="font-medium text-[18px] leading-[41px] text-[#666666]">Smart Recall</span>
             <span className="font-medium text-[18px] leading-[41px] text-[#666666]">Emotional Intelligence</span>
             <span className="font-medium text-[18px] leading-[41px] text-[#666666]">Growth Tracking</span>
           </div>
-        </div>
-      </section>
 
-      {/* Phone Mockups */}
-      <section id="mockups" className="relative px-[100px] py-[60px]">
-        <div className="mx-auto flex justify-center">
-          <div className="relative w-[75vw]">
-            <img
-              src="images/a.png"
-              alt="Plureto app interface"
-              className="w-full h-auto object-contain"
-              loading="lazy"
-            />
+          {/* Phone Mockups - Bigger */}
+          <div className="flex justify-center">
+            <div className="relative w-[70vw] max-w-[1000px]">
+              <img
+                src="images/a.png"
+                alt="Plureto app interface"
+                className="w-full h-auto object-contain"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Phone Mockups - Hidden/Merged */}
+      <section id="mockups" className="hidden"></section>
 
       {/* Black Section - It's time to think smarter */}
       <section id="smarter" className="relative w-full bg-black px-[152px] py-[120px] my-[120px] text-white">
@@ -495,7 +496,7 @@ function App() {
       </section>
 
       {/* Calendar Section */}
-      <section id="calendar" className="relative px-[126px] py-[120px] bg-gradient-to-br from-[#F8FAFC] to-[#EEF2F6]">
+      <section id="calendar" className="relative px-[126px] py-[120px] mt-[120px] bg-gradient-to-br from-[#F8FAFC] to-[#EEF2F6]">
         <div className="mx-auto max-w-[1280px]">
           <div className="grid grid-cols-2 gap-[80px] items-center">
             {/* Left side - Text content */}
@@ -661,33 +662,68 @@ function App() {
         </div>
       </footer>
 
-      <div className="fixed right-8 bottom-10 z-50 flex flex-col gap-3">
+      {/* Navigation Arrows - Glass Design */}
+      <div className="fixed right-[40px] top-1/2 -translate-y-1/2 z-50 flex flex-col gap-[16px]">
+        {/* Up Arrow */}
         <button
           type="button"
           onClick={() => scrollToSection(activeSectionIndex - 1)}
           disabled={activeSectionIndex === 0}
-          className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#2F54A7]/40 bg-white/80 backdrop-blur transition shadow-[0_10px_30px_rgba(47,84,167,0.18)] ${
-            activeSectionIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'
+          className={`group flex h-[56px] w-[56px] items-center justify-center rounded-[16px] bg-white/20 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(61,116,182,0.15)] transition-all duration-300 ${
+            activeSectionIndex === 0 
+              ? 'opacity-30 cursor-not-allowed' 
+              : 'hover:bg-white/30 hover:border-white/60 hover:shadow-[0_8px_40px_rgba(61,116,182,0.25)] hover:-translate-y-1 active:scale-95'
           }`}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F54A7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 15l6-6 6 6" />
+          <svg 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#3D74B6" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="transition-transform group-hover:-translate-y-0.5"
+          >
+            <path d="M18 15l-6-6-6 6" />
           </svg>
         </button>
+
+        {/* Section Indicator */}
+        <div className="flex flex-col items-center justify-center h-[36px] px-[12px] rounded-[12px] bg-white/25 backdrop-blur-xl border border-white/40 shadow-[0_4px_16px_rgba(61,116,182,0.1)]">
+          <span className="font-semibold text-[13px] text-[#3D74B6]">
+            {activeSectionIndex + 1}/{sectionOrder.length}
+          </span>
+        </div>
+
+        {/* Down Arrow */}
         <button
           type="button"
           onClick={() => scrollToSection(activeSectionIndex + 1)}
           disabled={activeSectionIndex === sectionOrder.length - 1}
-          className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#2F54A7]/40 bg-white/80 backdrop-blur transition shadow-[0_10px_30px_rgba(47,84,167,0.18)] ${
-            activeSectionIndex === sectionOrder.length - 1 ? 'opacity-40 cursor-not-allowed' : 'hover:translate-y-1'
+          className={`group flex h-[56px] w-[56px] items-center justify-center rounded-[16px] bg-white/20 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(61,116,182,0.15)] transition-all duration-300 ${
+            activeSectionIndex === sectionOrder.length - 1
+              ? 'opacity-30 cursor-not-allowed'
+              : 'hover:bg-white/30 hover:border-white/60 hover:shadow-[0_8px_40px_rgba(61,116,182,0.25)] hover:translate-y-1 active:scale-95'
           }`}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F54A7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 9l-6 6-6-6" />
+          <svg 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#3D74B6" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="transition-transform group-hover:translate-y-0.5"
+          >
+            <path d="M6 9l6 6 6-6" />
           </svg>
         </button>
       </div>
-      </div>
+    </div>
   )
 }
 
