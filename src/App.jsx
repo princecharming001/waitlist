@@ -6,19 +6,19 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 const supabaseWaitlistTable = import.meta.env.VITE_SUPABASE_WAITLIST_TABLE
 
 const supabaseClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
-const WAITLIST_DISPLAY_OFFSET = 2350
+const WAITLIST_DISPLAY_OFFSET = 2344
 
 function App() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState({ type: 'idle', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [displayCount, setDisplayCount] = useState(WAITLIST_DISPLAY_OFFSET)
+  const [displayCount, setDisplayCount] = useState(0)
   const [activeSectionIndex, setActiveSectionIndex] = useState(0)
 
   const isSupabaseConfigured = Boolean(supabaseClient && supabaseWaitlistTable)
-  const displayCountRef = useRef(WAITLIST_DISPLAY_OFFSET)
-  const animationIntervalRef = useRef(null)
+  const displayCountRef = useRef(0)
+  const animationFrameRef = useRef(null)
 
   const sectionOrder = useMemo(
     () => ['hero', 'pillars', 'mockups', 'smarter', 'features-grid', 'calendar', 'insights', 'final-section', 'footer'],
@@ -30,54 +30,100 @@ function App() {
   }, [displayCount])
 
   const clearCountAnimation = useCallback(() => {
-    if (animationIntervalRef.current) {
-      clearInterval(animationIntervalRef.current)
-      animationIntervalRef.current = null
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current)
+      animationFrameRef.current = null
     }
   }, [])
 
   useEffect(() => () => clearCountAnimation(), [clearCountAnimation])
 
   const animateCountTo = useCallback(
-    (target) => {
+    (target, startFrom = null) => {
       if (typeof target !== 'number') return
-      if (target <= displayCountRef.current) {
+      
+      const start = startFrom !== null ? startFrom : displayCountRef.current
+      if (start >= target) {
         setDisplayCount(target)
+        displayCountRef.current = target
         return
       }
 
       clearCountAnimation()
-      animationIntervalRef.current = setInterval(() => {
-        setDisplayCount((prev) => {
-          if (prev >= target) {
-            clearCountAnimation()
-            return prev
-          }
-          return prev + 1
-        })
-      }, 24)
+
+      const duration = 2500 // 2.5 seconds for the animation
+      const startTime = performance.now()
+      const difference = target - start
+
+      // Easing function: starts fast, slows down at the end
+      const easeOutExpo = (t) => {
+        return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+      }
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        const easedProgress = easeOutExpo(progress)
+        const currentCount = Math.floor(start + difference * easedProgress)
+
+        setDisplayCount(currentCount)
+        displayCountRef.current = currentCount
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate)
+        } else {
+          setDisplayCount(target)
+          displayCountRef.current = target
+          clearCountAnimation()
+        }
+      }
+
+      animationFrameRef.current = requestAnimationFrame(animate)
     },
     [clearCountAnimation],
   )
 
-  const fetchWaitlistCount = useCallback(async () => {
-    if (!isSupabaseConfigured) return
+  const fetchWaitlistCount = useCallback(async (animateFromZero = false) => {
+    if (!isSupabaseConfigured) {
+      console.log('⚠️ Supabase not configured - check your .env file')
+      return
+    }
+    
     const { count, error } = await supabaseClient
       .from(supabaseWaitlistTable)
       .select('*', { head: true, count: 'exact' })
 
     if (error) {
-      console.error('Failed to fetch waitlist count', error)
+      console.error('❌ Failed to fetch waitlist count:', error)
       return
     }
 
+    console.log('📊 Database entries:', count)
+    console.log('📊 Offset:', WAITLIST_DISPLAY_OFFSET)
     const targetCount = WAITLIST_DISPLAY_OFFSET + (count ?? 0)
-    animateCountTo(targetCount)
+    console.log('📊 Total display count:', targetCount)
+    
+    if (animateFromZero) {
+      // Start animation from 0 on initial load
+      animateCountTo(targetCount, 0)
+    } else {
+      // Animate from current count (for incremental updates)
+      animateCountTo(targetCount)
+    }
   }, [animateCountTo, isSupabaseConfigured])
 
   useEffect(() => {
-    fetchWaitlistCount()
-  }, [fetchWaitlistCount])
+    // Animate from 0 ONLY on initial mount
+    fetchWaitlistCount(true)
+    
+    // Poll database every 30 seconds to stay in sync (without animating from 0)
+    const pollInterval = setInterval(() => {
+      fetchWaitlistCount(false)
+    }, 30000) // 30 seconds
+    
+    return () => clearInterval(pollInterval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -147,8 +193,8 @@ function App() {
 
       setStatus({ type: 'success', message: 'Thanks! You are on the waitlist.' })
       setEmail('')
+      // Increment count by 1 with smooth animation
       animateCountTo(displayCountRef.current + 1)
-      fetchWaitlistCount()
       setTimeout(() => {
         setIsWaitlistOpen(false)
         setStatus({ type: 'idle', message: '' })
@@ -187,6 +233,15 @@ function App() {
               Plureto
             </span>
           </div>
+        </div>
+        
+        {/* Backed By Badge */}
+        <div className="flex items-center -mt-1">
+          <p className="font-normal text-[14px] leading-[20px] text-[#6B7280]">
+            Backed by{' '}
+            <span className="font-semibold text-[#3D74B6]">Sam Altman's</span>{' '}
+            <span className="italic text-[#1E1E1E]">The Residency</span>
+          </p>
         </div>
       </header>
 
