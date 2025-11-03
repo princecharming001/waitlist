@@ -6,7 +6,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 const supabaseWaitlistTable = import.meta.env.VITE_SUPABASE_WAITLIST_TABLE
 
 const supabaseClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
-const WAITLIST_DISPLAY_OFFSET = 2344
+const WAITLIST_DISPLAY_OFFSET = 2350
 
 function App() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
@@ -491,12 +491,12 @@ function App() {
 
             {/* Right side - Calendar image placeholder */}
             <div className="relative">
-              <div className="relative w-full h-[600px] rounded-[32px] bg-white shadow-[0_25px_80px_rgba(61,116,182,0.25)] overflow-hidden border border-[#E5E7EB] p-[40px] flex items-center justify-center">
+              <div className="relative w-full rounded-[32px] bg-white shadow-[0_25px_80px_rgba(61,116,182,0.25)] overflow-hidden border border-[#E5E7EB] p-[20px]">
                 {/* Placeholder for calendar image */}
                 <img
-                  src="images/a.png"
+                  src="images/Screenshot 2025-11-02 at 11.45.42 AM.png"
                   alt="Plureto Calendar Interface"
-                  className="w-full h-full object-cover rounded-[24px]"
+                  className="w-full h-auto object-contain rounded-[6px]"
                   loading="lazy"
                 />
               </div>

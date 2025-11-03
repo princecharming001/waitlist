@@ -7,5 +7,16 @@ export default defineConfig({
   base: './',  // Relative paths for custom domain
   build: {
     outDir: 'docs'
+  },
+  server: {
+    host: 'localhost',
+    port: 5173,
+    strictPort: false,
+    hmr: {
+      overlay: true
+    },
+    watch: {
+      usePolling: true
+    }
   }
 })
