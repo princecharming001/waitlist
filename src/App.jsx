@@ -224,7 +224,7 @@ function App() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <img
-              src="images/a812b677-40b6-42f6-b932-1f000274952c.png"
+              src="images/translogo.png"
               alt="Plureto logo"
               className="h-[44px] w-auto object-contain drop-shadow-sm"
               loading="lazy"
