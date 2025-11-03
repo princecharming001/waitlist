@@ -21,7 +21,7 @@ function App() {
   const animationIntervalRef = useRef(null)
 
   const sectionOrder = useMemo(
-    () => ['hero', 'pillars', 'mockups', 'smarter', 'features-grid', 'insights', 'final-section', 'footer'],
+    () => ['hero', 'pillars', 'mockups', 'smarter', 'features-grid', 'calendar', 'insights', 'final-section', 'footer'],
     [],
   )
 
@@ -434,6 +434,75 @@ function App() {
                 className="relative w-[90%] h-auto object-contain"
                 loading="lazy"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Calendar Section */}
+      <section id="calendar" className="relative px-[126px] py-[120px] bg-gradient-to-br from-[#F8FAFC] to-[#EEF2F6]">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-2 gap-[80px] items-center">
+            {/* Left side - Text content */}
+            <div>
+              <p className="font-semibold text-[24px] leading-[30px] text-[#3D74B6] mb-[20px]">
+                Stay Organized
+              </p>
+              <h2 className="font-semibold text-[64px] leading-[77px] tracking-[-0.04em] text-black mb-[32px]">
+                Your Schedule,<br />
+                Simplified
+              </h2>
+              <p className="font-normal text-[26px] leading-[36px] text-[#282828] mb-[40px]">
+                Plureto's intelligent calendar keeps you on track with smart scheduling, automatic reminders, and seamless integration with your daily routine. Never miss what matters most.
+              </p>
+              <div className="space-y-[20px]">
+                <div className="flex items-start gap-[16px]">
+                  <div className="w-[32px] h-[32px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[4px]">
+                    <svg className="w-[18px] h-[18px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="font-normal text-[20px] leading-[28px] text-[#1E1E1E]">
+                    Smart scheduling with AI-powered suggestions
+                  </p>
+                </div>
+                <div className="flex items-start gap-[16px]">
+                  <div className="w-[32px] h-[32px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[4px]">
+                    <svg className="w-[18px] h-[18px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="font-normal text-[20px] leading-[28px] text-[#1E1E1E]">
+                    Automatic reminders for important events
+                  </p>
+                </div>
+                <div className="flex items-start gap-[16px]">
+                  <div className="w-[32px] h-[32px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[4px]">
+                    <svg className="w-[18px] h-[18px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="font-normal text-[20px] leading-[28px] text-[#1E1E1E]">
+                    Seamless sync across all your devices
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - Calendar image placeholder */}
+            <div className="relative">
+              <div className="relative w-full h-[600px] rounded-[32px] bg-white shadow-[0_25px_80px_rgba(61,116,182,0.25)] overflow-hidden border border-[#E5E7EB] p-[40px] flex items-center justify-center">
+                {/* Placeholder for calendar image */}
+                <img
+                  src="images/a.png"
+                  alt="Plureto Calendar Interface"
+                  className="w-full h-full object-cover rounded-[24px]"
+                  loading="lazy"
+                />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -top-[20px] -right-[20px] w-[120px] h-[120px] bg-gradient-to-br from-[#3D74B6] to-[#7C9CFF] rounded-full blur-[60px] opacity-40"></div>
+              <div className="absolute -bottom-[20px] -left-[20px] w-[100px] h-[100px] bg-gradient-to-br from-[#4A6FD0] to-[#3D74B6] rounded-full blur-[50px] opacity-30"></div>
             </div>
           </div>
         </div>
