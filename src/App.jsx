@@ -582,7 +582,7 @@ function App() {
           </button>
         </div>
       </section>
-
+<br></br>
       {/* Final Section */}
       <section id="final-section" className="relative px-[100px] py-[80px]">
         <div className="mx-auto flex max-w-[1280px] justify-between items-start">
