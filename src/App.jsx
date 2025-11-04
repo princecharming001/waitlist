@@ -6,7 +6,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 const supabaseWaitlistTable = import.meta.env.VITE_SUPABASE_WAITLIST_TABLE
 
 const supabaseClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
-const WAITLIST_DISPLAY_OFFSET = 2344
+const WAITLIST_DISPLAY_OFFSET = 3006
 
 function App() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
@@ -98,10 +98,10 @@ function App() {
       return
     }
 
-    console.log('📊 Database entries:', count)
-    console.log('📊 Offset:', WAITLIST_DISPLAY_OFFSET)
+    // console.log('📊 Database entries:', count)
+    // console.log('📊 Offset:', WAITLIST_DISPLAY_OFFSET)
     const targetCount = WAITLIST_DISPLAY_OFFSET + (count ?? 0)
-    console.log('📊 Total display count:', targetCount)
+    // console.log('📊 Total display count:', targetCount)
     
     if (animateFromZero) {
       // Start animation from 0 on initial load
