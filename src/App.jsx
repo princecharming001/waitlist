@@ -15,6 +15,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [displayCount, setDisplayCount] = useState(0)
   const [activeSectionIndex, setActiveSectionIndex] = useState(0)
+  const [isPricingOpen, setIsPricingOpen] = useState(false)
 
   const isSupabaseConfigured = Boolean(supabaseClient && supabaseWaitlistTable)
   const displayCountRef = useRef(0)
@@ -235,8 +236,15 @@ function App() {
           </div>
         </div>
         
-        {/* Backed By Badge */}
-        <div className="flex items-center -mt-1">
+        {/* Navigation and Badge */}
+        <div className="flex items-center gap-[48px] -mt-1">
+          <button
+            type="button"
+            onClick={() => setIsPricingOpen(true)}
+            className="font-semibold text-[18px] leading-[22px] text-[#3D74B6] hover:text-[#2F54A7] transition-colors duration-200 hover:scale-105 transform"
+          >
+            Pricing
+          </button>
           <p className="font-normal text-[14px] leading-[20px] text-[#6B7280]">
             Backed by{' '}
             <span className="font-semibold text-[#3D74B6]">Sam Altman's</span>{' '}
@@ -661,6 +669,209 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Pricing Modal */}
+      {isPricingOpen && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-8 bg-black/50 backdrop-blur-sm animate-[fadeIn_0.3s_ease-out]"
+          onClick={() => setIsPricingOpen(false)}
+        >
+          <div 
+            className="relative bg-white rounded-[32px] shadow-[0_25px_100px_rgba(61,116,182,0.35)] max-w-[1100px] w-full max-h-[90vh] overflow-y-auto animate-[slideUp_0.4s_ease-out]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsPricingOpen(false)}
+              className="absolute top-[24px] right-[24px] w-[40px] h-[40px] rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-200 hover:scale-110 z-10"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E1E1E" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Pricing Content */}
+            <div className="px-[80px] py-[60px]">
+              <div className="text-center mb-[60px]">
+                <h2 className="font-bold text-[64px] leading-[76px] tracking-[-0.04em] text-[#1E1E1E] mb-[16px]">
+                  Choose Your Plan
+                </h2>
+                <p className="font-normal text-[22px] leading-[28px] text-[#666666]">
+                  Unlock your full potential with Plureto
+                </p>
+              </div>
+
+              {/* Pricing Cards */}
+              <div className="grid grid-cols-2 gap-[40px] mb-[48px]">
+                {/* Monthly Plan */}
+                <div className="group relative bg-gradient-to-br from-[#F8FAFC] to-[#EEF2F6] rounded-[24px] p-[40px] border-2 border-[#E5E7EB] hover:border-[#3D74B6] transition-all duration-300 hover:shadow-[0_20px_60px_rgba(61,116,182,0.25)] hover:-translate-y-2 animate-[scaleIn_0.5s_ease-out]">
+                  <div className="mb-[32px]">
+                    <h3 className="font-semibold text-[28px] leading-[34px] text-[#1E1E1E] mb-[12px]">
+                      Monthly
+                    </h3>
+                    <div className="flex items-baseline gap-[8px]">
+                      <span className="font-bold text-[56px] leading-[64px] text-[#3D74B6]">$12.99</span>
+                      <span className="font-normal text-[20px] leading-[24px] text-[#666666]">/month</span>
+                    </div>
+                    <p className="mt-[12px] font-normal text-[16px] leading-[22px] text-[#666666]">
+                      Perfect for trying out Plureto
+                    </p>
+                  </div>
+
+                  <button className="w-full py-[16px] rounded-[12px] bg-gradient-to-r from-[#3D74B6] to-[#6A9FFF] text-white font-semibold text-[18px] shadow-[0_10px_30px_rgba(61,116,182,0.3)] hover:shadow-[0_15px_40px_rgba(61,116,182,0.4)] transition-all duration-200 hover:scale-[1.02] mb-[32px]">
+                    Get Started
+                  </button>
+
+                  <div className="space-y-[16px]">
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-[#1E1E1E]">
+                        Real-time AI insights across all your apps
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-[#1E1E1E]">
+                        Smart calendar integration
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-[#1E1E1E]">
+                        Emotional intelligence tracking
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-[#1E1E1E]">
+                        Weekly growth reports
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-[#3D74B6] flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-[#1E1E1E]">
+                        Priority email support
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Yearly Plan - Popular */}
+                <div className="group relative bg-gradient-to-br from-[#3D74B6] to-[#5C8AE8] rounded-[24px] p-[40px] border-2 border-[#3D74B6] transition-all duration-300 hover:shadow-[0_25px_70px_rgba(61,116,182,0.4)] hover:-translate-y-2 animate-[scaleIn_0.5s_ease-out_0.1s] animate-fill-mode-backwards overflow-hidden">
+                  {/* Popular Badge */}
+                  <div className="absolute top-[20px] right-[20px] bg-white/20 backdrop-blur-md px-[16px] py-[6px] rounded-full border border-white/40">
+                    <span className="font-semibold text-[14px] text-white">🌟 Most Popular</span>
+                  </div>
+
+                  {/* Animated Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_3s_ease-in-out_infinite] pointer-events-none"></div>
+
+                  <div className="mb-[32px] relative z-10">
+                    <h3 className="font-semibold text-[28px] leading-[34px] text-white mb-[12px]">
+                      Yearly
+                    </h3>
+                    <div className="flex items-baseline gap-[8px]">
+                      <span className="font-bold text-[56px] leading-[64px] text-white">$119.99</span>
+                      <span className="font-normal text-[20px] leading-[24px] text-white/80">/year</span>
+                    </div>
+                    <div className="mt-[8px] inline-block bg-[#00E676]/20 backdrop-blur-sm px-[12px] py-[4px] rounded-full border border-[#00E676]/40">
+                      <span className="font-semibold text-[14px] text-[#00E676]">Save $36 per year!</span>
+                    </div>
+                    <p className="mt-[12px] font-normal text-[16px] leading-[22px] text-white/90">
+                      Best value for committed users
+                    </p>
+                  </div>
+
+                  <button className="w-full py-[16px] rounded-[12px] bg-white text-[#3D74B6] font-semibold text-[18px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-all duration-200 hover:scale-[1.02] mb-[32px] relative z-10">
+                    Get Started
+                  </button>
+
+                  <div className="space-y-[16px] relative z-10">
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-white flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-[#3D74B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-white">
+                        Everything in Monthly, plus:
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-white flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-[#3D74B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-white">
+                        Advanced pattern recognition & predictions
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-white flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-[#3D74B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-white">
+                        Unlimited memory storage & recall
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-white flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-[#3D74B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-white">
+                        Custom AI personality training
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-[12px]">
+                      <div className="w-[24px] h-[24px] rounded-full bg-white flex items-center justify-center flex-shrink-0 mt-[2px]">
+                        <svg className="w-[14px] h-[14px] text-[#3D74B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-normal text-[16px] leading-[22px] text-white">
+                        24/7 priority support & early feature access
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Note */}
+              <div className="text-center pt-[24px] border-t border-gray-200">
+                <p className="font-normal text-[16px] leading-[22px] text-[#666666]">
+                  All plans include a 14-day free trial. No credit card required to start.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Navigation Arrows - Glass Design */}
       <div className="fixed right-[40px] top-1/2 -translate-y-1/2 z-50 flex flex-col gap-[16px]">
